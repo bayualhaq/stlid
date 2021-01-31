@@ -1,5 +1,9 @@
-# stl badvpn
+# stlid badvpn
 wget --no-check-certificate "https://raw.githubusercontent.com/bayualhaq/stlid/main/stlid/install.sh" -O ~/install.sh && chmod 777 ~/install.sh && ~/./install.sh
+
+# stlsg badvpn
+wget --no-check-certificate "https://raw.githubusercontent.com/bayualhaq/stlid/main/stlsg/install.sh" -O ~/install.sh && chmod 777 ~/install.sh && ~/./install.sh
+
 
 # stl gotun
 wget --no-check-certificate "https://raw.githubusercontent.com/bayualhaq/stlid/main/stl2/install.sh" -O ~/install.sh && chmod 777 ~/install.sh && ~/./install.sh

@@ -271,22 +271,17 @@ else
 echo "anda belum membuat profile"
 exit
 fi
-cat <<EOF> /usr/bin/ping-stlid
+echo '
 #!/bin/bash
 #stlid (Wegare)
-while :
-do
-fping -c1 10.0.0.2
-sleep 1
-done
-EOF
+host="$(cat /root/akun/stlid.txt | grep -i host | cut -d= -f2 | head -n1)"
+fping -l $host' > /usr/bin/ping-stlid
 chmod +x /usr/bin/ping-stlid
 /usr/bin/ping-stlid > /dev/null 2>&1 &
 elif [ "${tools}" = "3" ]; then
 host="$(cat /root/akun/stlid.txt | grep -i host | cut -d= -f2 | head -n1)" 
 route="$(cat /root/akun/ipmodem.txt | grep -i ipmodem | cut -d= -f2 | tail -n1)" 
-#killall screen
-killall -q badvpn-tun2socks ssh ping-stlid stunnel sshpass http-stlid screen
+killall -q badvpn-tun2socks ssh ping-stlid stunnel sshpass http-stlid screen fping
 route del 8.8.8.8 gw "$route" metric 0 2>/dev/null
 route del 8.8.4.4 gw "$route" metric 0 2>/dev/null
 route del "$host" gw "$route" metric 0 2>/dev/null
@@ -305,7 +300,7 @@ cat <<EOF>> /etc/crontabs/root
 */1 * * * *  autorekonek-stlid
 # END AUTOREKONEKstlid
 EOF
-sed -i 's/exit 0/ /g' /etc/rc.local
+sed -i '/^$/d' /etc/crontabs/root 2>/dev/null
 /etc/init.d/cron restart
 echo "Enable Suksess"
 sleep 2
